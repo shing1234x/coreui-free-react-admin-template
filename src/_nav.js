@@ -114,7 +114,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Tables',
+        name: 'Tables2',
         to: '/base/tables',
       },
       {

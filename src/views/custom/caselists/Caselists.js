@@ -11,7 +11,7 @@ import PersonFilter from './personFilter.jsx';
 
 const MyCellComponent = p => {
   return <>
-    <CButton color='primary' size="sm" onClick={() => window.alert('Hi')}>{p.value}</CButton>
+    <CButton color='primary' size="sm" onClick={() => window.alert(p.value)}>{p.value}</CButton>
   </>;
 };
 
@@ -20,27 +20,31 @@ const GridExample = () => {
 
   // Row Data: The data to be displayed.
   const [rowData, setRowData] = useState([
-    { make: "Tesla", model: "Model Ysd", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series F-Series F-Series F-Series F-Series F-Series F-Series ", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
+    { file_ref: "KW6/00001", file_part: "I", premises_address: 'Shop 1, 3/F, 123 Nathan Road', active_case: 0 },
+    { file_ref: "KW2/00002", file_part: "II", premises_address: 'Shop 2, 3/F, 750 Canton Road', active_case: 1 },
+    { file_ref: "KW13/00003", file_part: "15", premises_address: 'Shop 3, 3/F, 99 Tai Tsun Road', active_case: 2 },
   ]);
   
   // Column Definitions: Defines the columns to be displayed.
   const [colDefs, setColDefs] = useState([
-    { field: "make",
+    { field: "file_ref",
+      headerName: "File No.",
       cellRenderer: MyCellComponent,
       editable: false
+    },  
+    { field: "file_part",
+      headerName: "File Part"
     },
-    { headerName: "Model",
-      valueGetter: d => d.data.model,
-      flex:3,
+    { field: "premises_address",
+      valueGetter: d => d.data.premises_address,
+      flex:5,
       filter: PersonFilter,
       floatingFilter: true,
-      floatingFilterComponent: PersonFloatingFilter},
-    { field: "price",
-      valueFormatter: d => "HK$" + d.value.toLocaleString()
+      floatingFilterComponent: PersonFloatingFilter
     },
-    { field: "electric" }
+    { field: "active_case",
+      valueFormatter: d => d.value.toLocaleString() + " case(s)"
+     }
   ]);
 
   const defaultColDef = useMemo( () => {
